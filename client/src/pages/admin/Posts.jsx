@@ -1,11 +1,11 @@
 import { useState } from "react";
-import AdminSidebar from "../../components/AdminSidebar";
-import useWindowSize from "../../hooks/useWindowSize";
 import SidebarHeader from "../../components/SidebarHeader";
+import AdminSidebar from "../../components/AdminSidebar";
 
-const Admin = () => {
+import useWindowSize from "../../hooks/useWindowSize";
+
+const Posts = () => {
   const [isOpen, setIsOpen] = useState(true);
-
   const { windowSize } = useWindowSize();
 
   return (
@@ -22,4 +22,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Posts;

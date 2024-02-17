@@ -76,6 +76,7 @@ const Home = () => {
           y: 0,
           opacity: 1,
           ease: "Elastic.inOut",
+          // delay: 0.3,
           scrollTrigger: {
             trigger: `.${ele}`,
             start: "center 90%",
@@ -88,6 +89,13 @@ const Home = () => {
   return (
     <main className="scroll-smooth">
       <div className="font-sans bg-darkblue text-slate-300 selection:bg-cyan-500 selection:text-black">
+        {/* RESUME BUTTON */}
+        {/* <a
+          href=""
+          className="fixed hidden px-2 py-4 text-2xl font-bold tracking-wider uppercase duration-200 -translate-y-1/2 border rounded right-20 top-2/4 bg-lightblue hover:bg-slate-300 hover:text-lightblue text-slate-300 border-slate-300 lg:block vertical-rl"
+        >
+          resume
+        </a> */}
         {/* HERO SECTION */}
         <div className="flex flex-col items-center justify-center h-screen px-4 py-10">
           <h1 className="text-5xl font-bold text-center sm:text-6xl name">
