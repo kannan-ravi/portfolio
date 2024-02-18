@@ -1,4 +1,4 @@
-import PageLayout from "./components/PageLayout";
+import PageLayout from "./routes/PageLayout";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Home from "./pages/Home";
@@ -9,6 +9,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Profile from "./pages/admin/Profile";
 import Posts from "./pages/admin/Posts";
 import EditProfile from "./pages/admin/EditProfile";
+import PrivateRoutes from "./routes/PrivateRoutes";
 function App() {
   return (
     <BrowserRouter>
@@ -19,10 +20,12 @@ function App() {
           <Route path="/post" element={<BlogPost />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/posts" element={<Posts />} />
-        <Route path="/admin/profile" element={<Profile />} />
-        <Route path="/admin/profile/edit" element={<EditProfile />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/posts" element={<Posts />} />
+          <Route path="/admin/profile" element={<Profile />} />
+          <Route path="/admin/profile/edit" element={<EditProfile />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

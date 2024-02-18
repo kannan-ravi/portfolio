@@ -1,4 +1,4 @@
-import errorHandler from "../middleware/errorHandler.js";
+import dataHandler from "../middleware/dataHandler.js";
 import authModel from "../model/auth.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -9,14 +9,12 @@ const loginController = async (req, res, next) => {
     const validUser = await authModel.findOne({ username });
 
     if (!validUser) {
-      return next(errorHandler.customErrorHandler(404, "Not Found"));
+      return next(dataHandler.customErrorHandler(404, "Incorrect Credentials"));
     }
 
     const validPassword = bcrypt.compareSync(password, validUser.password);
     if (!validPassword) {
-      return next(
-        errorHandler.customErrorHandler(401, "Incorrect Credentials")
-      );
+      return next(dataHandler.customErrorHandler(401, "Incorrect Credentials"));
     }
 
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
@@ -25,7 +23,7 @@ const loginController = async (req, res, next) => {
     res
       .cookie("token", token, { httpOnly: true, expires: expireDate })
       .status(200)
-      .json(rest);
+      .json(dataHandler.successHandler(rest));
   } catch (err) {
     next(err);
   }

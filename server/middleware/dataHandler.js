@@ -17,4 +17,13 @@ const customErrorHandler = (statusCode, message) => {
   return error;
 };
 
-export default { defaultErrorHandle, customErrorHandler };
+const successHandler = (data) => {
+  const successTemplate = {
+    success: true,
+    data: data,
+  };
+
+  return successTemplate;
+};
+
+export default { defaultErrorHandle, customErrorHandler, successHandler };

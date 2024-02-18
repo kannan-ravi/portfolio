@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 
 import connectDB from "./server/config/dbConn.js";
 import authRouter from "./server/routes/auth.route.js";
-import errorHandler from "./server/middleware/errorHandler.js";
+import errorHandler from "./server/middleware/dataHandler.js";
 dotenv.config();
 
 const app = express();
