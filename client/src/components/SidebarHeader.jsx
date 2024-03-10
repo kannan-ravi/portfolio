@@ -1,16 +1,9 @@
 import { RiBarChartHorizontalFill, RiSearchFill } from "react-icons/ri";
 
-const SidebarHeader = ({ setIsOpen, isOpen }) => {
+const SidebarHeader = () => {
   return (
-    <div className="relative flex items-center gap-8 py-6">
-      <RiBarChartHorizontalFill
-        className={`fixed text-5xl text-white p-2 rounded cursor-pointer z-1 duration-200 ${
-          isOpen? "left-68 bg-darkblue" : "left-4"
-        }`}
-        onClick={() => setIsOpen(!isOpen)}
-      />
-
-      <div className="relative flex items-center gap-4 ms-20 lg:ms-16">
+    <div className="sticky top-0 flex items-center gap-8 py-6 z-1 backdrop-blur-sm bg-darkblue/80">
+      <div className="relative flex items-center gap-4 ms-20 lg:ms-20">
         <input
           type="text"
           placeholder="Search"

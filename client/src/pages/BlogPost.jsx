@@ -34,8 +34,6 @@ const BlogPost = () => {
           </article>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 };

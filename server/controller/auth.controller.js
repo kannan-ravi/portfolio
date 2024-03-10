@@ -49,4 +49,8 @@ const loginController = async (req, res, next) => {
 //   }
 // };
 
-export default { loginController };
+const logoutController = (req, res) => {
+  res.clearCookie("token").status(200).json("Log Out Success");
+};
+
+export default { loginController, logoutController };

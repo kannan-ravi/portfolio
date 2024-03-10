@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { FaSleigh } from "react-icons/fa";
 
 const initialState = {
   isLoading: false,
@@ -29,9 +30,17 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.currentUser = null;
     },
+    logout: (state) => {
+      {
+        state.isLoading = false;
+        state.isError = false;
+        state.currentUser = null;
+      }
+    },
   },
 });
 
-export const { authenticating, authSuccess, authFailure } = authSlice.actions;
+export const { authenticating, authSuccess, authFailure, logout } =
+  authSlice.actions;
 
 export default authSlice.reducer;

@@ -239,8 +239,6 @@ const Home = () => {
             </form>
           </div>
         </section>
-
-        <Footer />
       </div>
     </main>
   );

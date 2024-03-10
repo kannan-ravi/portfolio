@@ -1,16 +1,16 @@
 import { useState } from "react";
-import useFetch from "../../hooks/useFetch";
+import useFetch from "../../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   authFailure,
   authSuccess,
   authenticating,
-} from "../../store/features/authSlice";
-import Toast from "../../components/Toast";
+} from "../../../store/features/authSlice";
+import Toast from "../../../components/Toast";
 
 const Login = () => {
-  const fetchApi = useFetch();
+  const { fetchData } = useFetch();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [adminData, setAdminData] = useState({});
@@ -27,7 +27,7 @@ const Login = () => {
     try {
       dispatch(authenticating());
       const url = `auth/login`;
-      const data = await fetchApi.fetchData(url, adminData);
+      const data = await fetchData(url, adminData);
 
       if (data.success === false) {
         dispatch(authFailure(data));
