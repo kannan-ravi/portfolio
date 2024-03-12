@@ -22,7 +22,7 @@ const Admin = () => {
 
               <div className="mx-5">
                 <h4 className="text-3xl font-semibold text-slate-200">0</h4>
-                <div className="text-base text-slate-400">Total Views</div>
+                <div className="text-sm text-slate-400">Total Views</div>
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@ const Admin = () => {
 
               <div className="mx-5">
                 <h4 className="text-3xl font-semibold text-slate-200">0</h4>
-                <div className="text-base text-slate-400">Total Likes</div>
+                <div className="text-sm text-slate-400">Total Likes</div>
               </div>
             </div>
           </div>
@@ -48,7 +48,7 @@ const Admin = () => {
 
               <div className="mx-5">
                 <h4 className="text-3xl font-semibold text-slate-200">0</h4>
-                <div className="text-base text-slate-400">Total Contact</div>
+                <div className="text-sm text-slate-400">Total Contact</div>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ const Admin = () => {
 
               <div className="mx-5">
                 <h4 className="text-3xl font-semibold text-slate-200">0</h4>
-                <div className="text-base text-slate-400">Resume Downloads</div>
+                <div className="text-sm text-slate-400">Resume Downloads</div>
               </div>
             </div>
           </div>

@@ -90,6 +90,41 @@ const DashboardTable = () => {
                 </button>
               </td>
             </tr>
+            <tr className="border-b">
+              <td className="p-4 truncate text-slate-300">
+                <h5>Lorem ipsum dolor sit amet consectetur</h5>
+              </td>
+              <td className="p-4 border-x">
+                <div className="w-max">
+                  <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase bg-green-900 rounded-md select-none whitespace-nowrap">
+                    <span className="">online</span>
+                  </div>
+                </div>
+              </td>
+              <td className="p-4 border-x">
+                  23/04/18
+              </td>
+              <td className="flex gap-6 p-4">
+                <button
+                  className="h-6 text-base text-center text-slate-200"
+                  type="button"
+                >
+                  <FaEye />
+                </button>
+                <button
+                  className="h-6 text-base text-center text-sky-400"
+                  type="button"
+                >
+                  <FaPencilAlt />
+                </button>
+                <button
+                  className="h-6 text-base text-center text-red-500 "
+                  type="button"
+                >
+                  <FaTrash />
+                </button>
+              </td>
+            </tr>
             
           </tbody>
         </table>

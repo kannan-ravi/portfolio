@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import connectDB from "./server/config/dbConn.js";
 import authRouter from "./server/routes/auth.route.js";
+import contactAttemptRouter from "./server/routes/contact-attempt.route.js";
 import errorHandler from "./server/middleware/dataHandler.js";
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
   res.send("Please check the api route for the data");
 });
 
+app.use("/api/", contactAttemptRouter);
 app.use("/api/auth", authRouter);
 
 app.use(errorHandler.defaultErrorHandle);
