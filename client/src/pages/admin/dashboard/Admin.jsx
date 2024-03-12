@@ -68,7 +68,7 @@ const Admin = () => {
         </div>
 
         <div className="px-6 mt-8">
-          <DashboardTable />
+          {/* <DashboardTable /> */}
         </div>
       </div>
     </div>

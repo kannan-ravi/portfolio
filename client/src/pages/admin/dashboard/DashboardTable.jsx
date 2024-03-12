@@ -1,11 +1,11 @@
 import { FaEye, FaTrash, FaPencilAlt } from "react-icons/fa";
 
-const DashboardTable = () => {
+const DashboardTable = ({ contactAttemptData, staticData }) => {
   return (
     <div className="relative flex flex-col w-full h-full py-4 shadow-md text-slate-200 bg-lightblue rounded-xl bg-clip-border">
       <div className="relative mx-4 mt-4 overflow-hidden rounded-none text-slate-200 bg-lightblue bg-clip-border">
         <h5 className="mb-6 text-xl antialiased font-semibold leading-snug tracking-normal text-slate-200">
-          Recent Posts
+          {staticData.heading}
         </h5>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="w-full overflow-hidden md:w-max">
@@ -38,7 +38,7 @@ const DashboardTable = () => {
           <div className="relative flex items-center w-full md:w-72">
             <input
               className="peer h-full w-full rounded-[7px] bg-transparent px-3 py-2.5 text-sm font-normal transition-all border-2 border-slate-500 outline-0 focus:border-slate-200 focus:placeholder:text-slate-200"
-              placeholder="Search Post"
+              placeholder={staticData.placeHolder}
             />
           </div>
         </div>
@@ -47,85 +47,31 @@ const DashboardTable = () => {
         <table className="w-full mt-4 text-left table-auto min-w-max">
           <thead>
             <tr className="even:bg-amber-100 odd:bg-blue-100">
-              <th className="p-4 bg-darkblue text-slate-200">Posts</th>
-              <th className="p-4 bg-darkblue text-slate-200">Status</th>
+              <th className="p-4 bg-darkblue text-slate-200">Name</th>
+              <th className="p-4 bg-darkblue text-slate-200">Email</th>
+              <th className="p-4 bg-darkblue text-slate-200">Message</th>
               <th className="p-4 bg-darkblue text-slate-200 ">Date</th>
-              <th className="p-4 bg-darkblue text-slate-200">Actions</th>
             </tr>
           </thead>
           <tbody>
-            
-            <tr className="border-b">
-              <td className="p-4 truncate text-slate-300">
-                <h5>Lorem ipsum dolor sit amet consectetur</h5>
-              </td>
-              <td className="p-4 border-x">
-                <div className="w-max">
-                  <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase bg-green-900 rounded-md select-none whitespace-nowrap">
-                    <span className="">online</span>
-                  </div>
-                </div>
-              </td>
-              <td className="p-4 border-x">
-                  23/04/18
-              </td>
-              <td className="flex gap-6 p-4">
-                <button
-                  className="h-6 text-base text-center text-slate-200"
-                  type="button"
-                >
-                  <FaEye />
-                </button>
-                <button
-                  className="h-6 text-base text-center text-sky-400"
-                  type="button"
-                >
-                  <FaPencilAlt />
-                </button>
-                <button
-                  className="h-6 text-base text-center text-red-500 "
-                  type="button"
-                >
-                  <FaTrash />
-                </button>
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-4 truncate text-slate-300">
-                <h5>Lorem ipsum dolor sit amet consectetur</h5>
-              </td>
-              <td className="p-4 border-x">
-                <div className="w-max">
-                  <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase bg-green-900 rounded-md select-none whitespace-nowrap">
-                    <span className="">online</span>
-                  </div>
-                </div>
-              </td>
-              <td className="p-4 border-x">
-                  23/04/18
-              </td>
-              <td className="flex gap-6 p-4">
-                <button
-                  className="h-6 text-base text-center text-slate-200"
-                  type="button"
-                >
-                  <FaEye />
-                </button>
-                <button
-                  className="h-6 text-base text-center text-sky-400"
-                  type="button"
-                >
-                  <FaPencilAlt />
-                </button>
-                <button
-                  className="h-6 text-base text-center text-red-500 "
-                  type="button"
-                >
-                  <FaTrash />
-                </button>
-              </td>
-            </tr>
-            
+            {contactAttemptData.map((data) => {
+              return (
+                <tr key={data._id}>
+                  <td className="p-4 truncate text-slate-300">
+                    <h5>{data.name}</h5>
+                  </td>
+                  <td className="p-4 truncate text-slate-300">
+                    <h5>{data.email}</h5>
+                  </td>
+                  <td className="p-4 truncate text-slate-300">
+                    <h5>{`${data.message.substring(0, 60)}...`}</h5>
+                  </td>
+                  <td className="p-4 truncate text-slate-300">
+                    <h5>{data.createdAt.substring(0, 10)}</h5>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

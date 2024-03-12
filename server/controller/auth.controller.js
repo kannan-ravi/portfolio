@@ -3,7 +3,7 @@ import authModel from "../model/auth.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const loginController = async (req, res, next) => {
+const login = async (req, res, next) => {
   const { password, username } = req.body;
   try {
     const validUser = await authModel.findOne({ username });
@@ -29,28 +29,8 @@ const loginController = async (req, res, next) => {
   }
 };
 
-// const registerController = async (req, res) => {
-//   const { username, password } = req.body;
-//   const saltRounds = 11;
-//   const hashedPassword = await bcrypt.hash(password, saltRounds);
-//   const newUser = new authModel({
-//     username,
-//     password: hashedPassword,
-//   });
-
-//   try {
-//     await newUser.save();
-//     res.status(200).json({
-//       success: true,
-//       Message: "User Has Been Succesfully Created",
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
-const logoutController = (req, res) => {
+const logout = (req, res) => {
   res.clearCookie("token").status(200).json("Log Out Success");
 };
 
-export default { loginController, logoutController };
+export default { login, logout };

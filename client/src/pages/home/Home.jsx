@@ -10,12 +10,13 @@ import {
   FaNodeJs,
 } from "react-icons/fa";
 import { SiTailwindcss, SiMongodb, SiExpress } from "react-icons/si";
-import Footer from "../components/Footer";
-import ExperienceCard from "../components/ExperienceCard";
-import ProjectCard from "../components/ProjectCard";
+import Footer from "../../components/Footer";
+import ExperienceCard from "../../components/ExperienceCard";
+import ProjectCard from "../../components/ProjectCard";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import ContactForm from "./ContactForm";
 
 const Home = () => {
   useGSAP(() => {
@@ -205,40 +206,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* CONTACT SECTION */}
-        <section id="contact" className="flex items-center min-h-screen py-10">
-          <div className="w-full max-w-4xl px-4 mx-auto">
-            <h2 className="mb-6 text-4xl font-bold text-slate-300 contact-heading">
-              Contact Me
-            </h2>
-            <p className="mt-3 text-gray-400 contact-description">
-              I'd love to hear from you! Feel free to reach out to me using the
-              form below.
-            </p>
-            <form className="grid gap-4 mt-6 contact-form">
-              <input
-                className="py-2 px-4 rounded-md bg-[#2D3748] text-white w-full"
-                placeholder="Your Name"
-                type="text"
-              />
-              <input
-                className="py-2 px-4 rounded-md bg-[#2D3748] text-white"
-                placeholder="Your Email"
-                type="email"
-              />
-              <textarea
-                className="py-2 px-4 rounded-md bg-[#2D3748] text-white h-32"
-                placeholder="Your Message"
-              />
-              <button
-                className="py-2 px-4 rounded-md bg-[#4A5568] text-white hover:opacity-85 duration-200"
-                type="submit"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </section>
+        <ContactForm />
       </div>
     </main>
   );

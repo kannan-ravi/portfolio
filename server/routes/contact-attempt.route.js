@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
   .route("/contact-attempt")
-  .post(contactAttemptController.saveContactAttemptController);
+  .get(contactAttemptController.getContactAttempt)
+  .post(contactAttemptController.saveContactAttempt);
 
 export default router;
