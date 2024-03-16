@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaEye, FaTrash, FaPencilAlt } from "react-icons/fa";
 
-const DashboardTable = ({ contactAttemptData, staticData }) => {
+const DashboardTable = ({ contactAttemptData, staticData, handleDelete }) => {
   const [searchText, setSearchText] = useState("");
   const [searchData, setSearchData] = useState(contactAttemptData);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -39,9 +39,7 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
               onChange={(e) => setItemsPerPage(parseInt(e.target.value))}
               value={itemsPerPage}
             >
-              <option value={5}>
-                5
-              </option>
+              <option value={5}>5</option>
               <option value={10}>10</option>
               <option value={20}>20</option>
               <option value={30}>30</option>
@@ -66,6 +64,7 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
               <th className="p-4 bg-darkblue text-slate-200">Email</th>
               <th className="p-4 bg-darkblue text-slate-200">Message</th>
               <th className="p-4 bg-darkblue text-slate-200 ">Date</th>
+              <th className="p-4 bg-darkblue text-slate-200 ">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -85,12 +84,21 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
                     <td className="p-4 text-slate-300">
                       <h5>{data.createdAt.substring(0, 10)}</h5>
                     </td>
+                    <td className="p-4 text-slate-300">
+                      <div className="flex items-center gap-4">
+                        <FaEye className="cursor-pointer" />
+                        <FaTrash
+                          className="text-red-500 cursor-pointer"
+                          onClick={() => handleDelete(data._id)}
+                        />
+                      </div>
+                    </td>
                   </tr>
                 );
               })
             ) : (
               <tr>
-                <td colSpan={4} className="p-4 text-center text-slate-300">
+                <td colSpan={5} className="p-4 text-center text-slate-300">
                   No Contact attempt Data
                 </td>
               </tr>
@@ -99,10 +107,14 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
         </table>
       </div>
       <div className="flex items-center justify-between p-4">
-        <p className="text-sm antialiased font-normal leading-normal text-blue-gray-900">
-          Page {currentPage} of {Math.ceil(searchData.length / itemsPerPage)} (
-          {searchData.length})
-        </p>
+        <div>
+          <p className="text-sm antialiased font-normal leading-normal text-blue-gray-900">
+            Page {currentPage} of {Math.ceil(searchData.length / itemsPerPage)}
+          </p>
+          <p className="antialiased font-normal leading-normal ftext-sm text-blue-gray-900">
+            Total - ({searchData.length})
+          </p>
+        </div>
         <div className="flex gap-2">
           <button
             className="px-4 py-2 font-sans text-xs font-bold text-center uppercase align-middle border rounded-lg text-slate-200"

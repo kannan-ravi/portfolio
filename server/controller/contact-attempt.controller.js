@@ -40,7 +40,7 @@ const saveContactAttempt = async (req, res, next) => {
   }
 };
 
-const getContactAttempt = async (req, res, next) => {
+const getAllContactAttempt = async (req, res, next) => {
   try {
     const getContactAttempt = await contactAttemptModel.find();
     res.json(dataHandler.successHandler(getContactAttempt));
@@ -49,4 +49,25 @@ const getContactAttempt = async (req, res, next) => {
   }
 };
 
-export default { saveContactAttempt, getContactAttempt };
+const deleteContactAttempt = async (req, res, next) => {
+  // if (req.user.id !== req.params.id) {
+  //   return next(
+  //     errorHandler.customError(401, "you can delete only your account")
+  //   );
+  // }
+
+  try {
+    const deleteContactAttempt = await contactAttemptModel.findByIdAndDelete({
+      _id: req.params.id,
+    });
+    res.status(200).json(dataHandler.successHandler(deleteContactAttempt));
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default {
+  saveContactAttempt,
+  getAllContactAttempt,
+  deleteContactAttempt,
+};

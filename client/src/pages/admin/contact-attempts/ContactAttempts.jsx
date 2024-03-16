@@ -22,11 +22,20 @@ const ContactAttempts = () => {
 
     fetchContactAttemptData();
   }, []);
+
+  const handleDelete = async (id) => {
+    const res = await fetch(`${environment}/api/contact-attempt/${id}`, {
+      method: "DELETE",
+    });
+
+    setContactAttemptsData(contactAttemptData.filter((data) => data._id !== id));
+  };
   return (
     <div className="px-6 mt-8">
       <DashboardTable
         contactAttemptData={contactAttemptData}
         staticData={staticData}
+        handleDelete={handleDelete}
       />
     </div>
   );
