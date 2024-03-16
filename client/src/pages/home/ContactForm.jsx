@@ -23,7 +23,12 @@ const ContactForm = () => {
       try {
         const url = "contact-attempt";
         const data = await fetchData(url, contactFormData);
-        console.log(data);
+
+        setContactFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
       } catch (error) {
         console.log(error);
       }
@@ -63,7 +68,7 @@ const ContactForm = () => {
             placeholder="Your Message"
             name="message"
             onChange={handleChange}
-            value={contactFormData.mesage && contactFormData.mesage}
+            value={contactFormData.message && contactFormData.message}
           />
           <button
             className="py-2 px-4 rounded-md bg-[#4A5568] text-white hover:opacity-85 duration-200"

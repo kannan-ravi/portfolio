@@ -4,6 +4,8 @@ import { FaEye, FaTrash, FaPencilAlt } from "react-icons/fa";
 const DashboardTable = ({ contactAttemptData, staticData }) => {
   const [searchText, setSearchText] = useState("");
   const [searchData, setSearchData] = useState(contactAttemptData);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
@@ -14,7 +16,14 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
       data.name.toLowerCase().includes(searchText.toLowerCase())
     );
     setSearchData(filteredData);
+    setCurrentPage(1);
   }, [searchText, contactAttemptData]);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = searchData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="relative flex flex-col w-full h-full py-4 shadow-md text-slate-200 bg-lightblue rounded-xl bg-clip-border">
@@ -24,11 +33,19 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
         </h5>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="w-full overflow-hidden md:w-max">
-            <select title="" className="px-6 py-2 rounded bg-darkblue">
-              <option className="bg-darkblue hover:bg-lightblue" selected>
-                10
+            <select
+              title="Results per page"
+              className="px-6 py-2 rounded-md bg-darkblue"
+              onChange={(e) => setItemsPerPage(parseInt(e.target.value))}
+              value={itemsPerPage}
+            >
+              <option value={5} selected>
+                5
               </option>
-              <option>20</option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={50}>50</option>
             </select>
           </div>
           <div className="relative flex items-center w-full md:w-72">
@@ -52,8 +69,8 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
             </tr>
           </thead>
           <tbody>
-            {searchData.length >= 1 ? (
-              searchData.map((data) => {
+            {currentItems.length >= 1 ? (
+              currentItems.map((data) => {
                 return (
                   <tr key={data._id}>
                     <td className="p-4 text-slate-300">
@@ -83,18 +100,25 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
       </div>
       <div className="flex items-center justify-between p-4">
         <p className="text-sm antialiased font-normal leading-normal text-blue-gray-900">
-          Page 1 of 10
+          Page {currentPage} of {Math.ceil(searchData.length / itemsPerPage)} (
+          {searchData.length})
         </p>
         <div className="flex gap-2">
           <button
             className="px-4 py-2 font-sans text-xs font-bold text-center uppercase align-middle border rounded-lg text-slate-200"
             type="button"
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
           >
             Previous
           </button>
           <button
             className="px-4 py-2 font-sans text-xs font-bold text-center uppercase align-middle border rounded-lg text-slate-200"
             type="button"
+            onClick={() => paginate(currentPage + 1)}
+            disabled={
+              currentPage === Math.ceil(searchData.length / itemsPerPage)
+            }
           >
             Next
           </button>

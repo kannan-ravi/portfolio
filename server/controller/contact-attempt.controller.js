@@ -20,24 +20,20 @@ const saveContactAttempt = async (req, res, next) => {
   try {
     if (name && email && message) {
       // const mailSender = await mailHandler(message, email);
-      if (mailSender.success) {
-        const saveData = new contactAttemptModel({
-          name,
-          email,
-          message,
-        });
+      const saveData = new contactAttemptModel({
+        name,
+        email,
+        message,
+      });
 
-        await saveData.save();
-        return res
-          .status(200)
-          .json(
-            dataHandler.successHandler(
-              "Your message has been successfully received"
-            )
-          );
-      } else {
-        return next(dataHandler.customErrorHandler(422, mailSender.message));
-      }
+      await saveData.save();
+      return res
+        .status(200)
+        .json(
+          dataHandler.successHandler(
+            "Your message has been successfully received"
+          )
+        );
     }
   } catch (error) {
     next(error);
