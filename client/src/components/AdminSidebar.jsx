@@ -4,7 +4,7 @@ import { MdDashboard } from "react-icons/md";
 import { FaPen, FaUser, FaSignOutAlt, FaHeadphones } from "react-icons/fa";
 import { RiBarChartHorizontalFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { logout } from "../store/features/authSlice";
+import { logout } from "../app/features/authSlice";
 
 const AdminSidebar = ({ handleSideBarOpen, isSideBarOpen }) => {
   const { pathname } = useLocation();

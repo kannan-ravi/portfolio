@@ -6,7 +6,7 @@ import {
   authFailure,
   authSuccess,
   authenticating,
-} from "../../../store/features/authSlice";
+} from "../../../app/features/authSlice";
 import Toast from "../../../components/Toast";
 
 const Login = () => {

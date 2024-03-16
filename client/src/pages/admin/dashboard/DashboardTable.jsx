@@ -39,7 +39,7 @@ const DashboardTable = ({ contactAttemptData, staticData }) => {
               onChange={(e) => setItemsPerPage(parseInt(e.target.value))}
               value={itemsPerPage}
             >
-              <option value={5} selected>
+              <option value={5}>
                 5
               </option>
               <option value={10}>10</option>
