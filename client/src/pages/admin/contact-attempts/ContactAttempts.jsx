@@ -7,7 +7,7 @@ const ContactAttempts = () => {
 
   const staticData = {
     heading: "Contact Attempt",
-    placeHolder: "Search Contact Attempt",
+    placeHolder: "Search by Name",
   };
   useEffect(() => {
     const fetchContactAttemptData = async () => {
