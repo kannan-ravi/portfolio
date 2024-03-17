@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaEye, FaTrash, FaPencilAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const DashboardTable = ({ contactAttemptData, staticData, handleDelete }) => {
   const [searchText, setSearchText] = useState("");
@@ -86,7 +87,9 @@ const DashboardTable = ({ contactAttemptData, staticData, handleDelete }) => {
                     </td>
                     <td className="p-4 text-slate-300">
                       <div className="flex items-center gap-4">
-                        <FaEye className="cursor-pointer" />
+                        <Link to={`/admin/contact-attempts/${data._id}`}>
+                          <FaEye className="cursor-pointer" />
+                        </Link>
                         <FaTrash
                           className="text-red-500 cursor-pointer"
                           onClick={() => handleDelete(data._id)}

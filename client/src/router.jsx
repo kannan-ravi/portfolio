@@ -11,6 +11,7 @@ import Login from "./pages/admin/login/Login";
 import BlogPost from "./pages/BlogPost";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ContactAttempts from "./pages/admin/contact-attempts/ContactAttempts";
+import ViewContactAttempts from "./pages/admin/contact-attempts/ViewContactAttempts";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
           {
             path: "/admin/contact-attempts",
             element: <ContactAttempts />,
+          },
+          {
+            path: "/admin/contact-attempts/:id",
+            element: <ViewContactAttempts />,
           },
         ],
       },

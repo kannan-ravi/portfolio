@@ -8,6 +8,11 @@ router
   .get(contactAttemptController.getAllContactAttempt)
   .post(contactAttemptController.saveContactAttempt);
 
-router.route('/contact-attempt/:id').delete(contactAttemptController.deleteContactAttempt);
+router
+  .route("/contact-attempt/:id")
+  .delete(contactAttemptController.deleteContactAttempt);
+router
+  .route("/contact-attempt/:id")
+  .get(contactAttemptController.getSingleContactAttempt);
 
 export default router;

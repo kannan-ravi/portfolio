@@ -1,5 +1,4 @@
 import dataHandler from "../middleware/dataHandler.js";
-// import mailHandler from "../middleware/mailHandler.js";
 import contactAttemptModel from "../model/contact-attempt.model.js";
 
 const saveContactAttempt = async (req, res, next) => {
@@ -49,13 +48,20 @@ const getAllContactAttempt = async (req, res, next) => {
   }
 };
 
-const deleteContactAttempt = async (req, res, next) => {
-  // if (req.user.id !== req.params.id) {
-  //   return next(
-  //     errorHandler.customError(401, "you can delete only your account")
-  //   );
-  // }
+const getSingleContactAttempt = async (req, res, next) => {
+  const { id } = req.params;
 
+  try {
+    const getSingleContactAttempt = await contactAttemptModel.findOne({
+      _id: id,
+    });
+    res.status(200).json(dataHandler.successHandler(getSingleContactAttempt));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteContactAttempt = async (req, res, next) => {
   try {
     const deleteContactAttempt = await contactAttemptModel.findByIdAndDelete({
       _id: req.params.id,
@@ -70,4 +76,5 @@ export default {
   saveContactAttempt,
   getAllContactAttempt,
   deleteContactAttempt,
+  getSingleContactAttempt,
 };
