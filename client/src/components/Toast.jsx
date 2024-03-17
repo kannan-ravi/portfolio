@@ -1,40 +1,57 @@
 import { useEffect } from "react";
 import { MdError, MdCheckCircle, MdCancel } from "react-icons/md";
-const Toast = ({
-  message,
-  isError,
-  isSuccess,
-  toastVisible,
-  setToastVisible,
-}) => {
+import { useDispatch, useSelector } from "react-redux";
+import { removeToast } from "../app/features/toastSlice";
+
+const Toast = () => {
+  const { isToastVisible, toastMessage, isToastSuccess, isToastError } =
+    useSelector((state) => state.toast);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     let timeoutId;
 
-    if (toastVisible) {
+    if (isToastVisible) {
       timeoutId = setTimeout(() => {
-        setToastVisible(false);
+        dispatch(removeToast());
       }, 5000);
     }
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [toastVisible]);
+  }, [isToastVisible]);
 
   return (
     <div
-      className={`absolute  left-2/4 -translate-x-2/4 min-w-max duration-200 ${
-        toastVisible ? "top-6" : "-top-10"
+      className={`absolute  left-2/4 -translate-x-2/4 min-w-max duration-200 z-20 border-2 ${
+        isToastVisible ? "top-6" : "-top-10"
+      } ${
+        isToastSuccess
+          ? "border-green-500"
+          : isToastError
+          ? "border-red-500"
+          : "border-transparent"
       }`}
     >
       <div className="flex items-center gap-4 px-4 py-2 bg-lightblue">
-        {isError ? (
+        {isToastError ? (
           <MdError className="text-red-500" />
-        ) : isSuccess ? (
+        ) : isToastSuccess ? (
           <MdCheckCircle className="text-green-500" />
         ) : null}
-        <p>{message}</p>
-        <MdCancel onClick={() => setToastVisible(false)} type="button" className="cursor-pointer" />
+        <p className="text-slate-200">{toastMessage}</p>
+        <MdCancel
+          onClick={() => dispatch(removeToast())}
+          type="button"
+          className={`cursor-pointer ${
+            isToastSuccess
+              ? "text-green-500"
+              : isToastError
+              ? "text-red-500"
+              : "text-transparent"
+          }`}
+        />
       </div>
     </div>
   );

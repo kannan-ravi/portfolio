@@ -1,21 +1,21 @@
 import { useState } from "react";
-import useFetch from "../../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  authFailure,
-  authSuccess,
-  authenticating,
-} from "../../../app/features/authSlice";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../app/features/authSlice";
 import Toast from "../../../components/Toast";
+import { useLoginMutation } from "../../../app/services/authApi";
+import {
+  removeToast,
+  toastError,
+  toastSuccess,
+} from "../../../app/features/toastSlice";
 
 const Login = () => {
-  const { fetchData } = useFetch();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [adminData, setAdminData] = useState({});
   const [toastVisible, setToastVisible] = useState(false);
-  const { isLoading, isError, isSuccess } = useSelector((state) => state.auth);
+  const [login, { isLoading, isError, isSuccess, error }] = useLoginMutation();
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -24,37 +24,20 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      dispatch(authenticating());
-      const url = `auth/login`;
-      const data = await fetchData(url, adminData);
+    dispatch(removeToast());
 
-      if (data.success === false) {
-        dispatch(authFailure(data));
-        setToastVisible(true);
-        return;
-      }
-      dispatch(authSuccess(data.data));
-      setToastVisible(true);
+    try {
+      const userData = await login(adminData).unwrap();
+      dispatch(toastSuccess("Successfully Logged In"));
+      dispatch(addUser(userData?.data));
       navigate("/admin");
-    } catch (error) {
-      dispatch(authFailure(error));
+    } catch (err) {
+      dispatch(toastError(error.data.message));
     }
   };
   return (
     <main className="scroll-smooth">
       <div className="font-sans bg-darkblue text-slate-300 selection:bg-cyan-500 selection:text-black">
-        <Toast
-          toastVisible={toastVisible}
-          message={
-            isError.success === false
-              ? isError.message
-              : "Logged In Successfully"
-          }
-          isError={isError.success === false}
-          isSuccess={isSuccess}
-          setToastVisible={setToastVisible}
-        />
         <div className="flex flex-col items-center justify-center min-h-screen px-4 py-10">
           <div className="px-8 py-12 rounded bg-slate-300">
             <div className="flex items-end gap-2 mb-6">
@@ -95,7 +78,7 @@ const Login = () => {
                 className="px-4 py-2 text-white duration-200 rounded-md bg-lightblue hover:opacity-85"
                 type="submit"
               >
-                Submit
+                {isLoading ? "Loading..." : "Submit"}
               </button>
             </form>
           </div>

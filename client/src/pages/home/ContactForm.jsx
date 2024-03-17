@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import useFetch from "../../hooks/useFetch";
+import { useState } from "react";
+import { useCreateContactAttemptMutation } from "../../app/services/contactAttemptApi";
+
 
 const ContactForm = () => {
-  const { fetchData } = useFetch();
 
   const [contactFormData, setContactFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+
+  const [createContactAttempt] = useCreateContactAttemptMutation();
+
   const handleChange = (e) => {
     setContactFormData({ ...contactFormData, [e.target.name]: e.target.value });
   };
@@ -21,9 +24,7 @@ const ContactForm = () => {
       contactFormData.message
     ) {
       try {
-        const url = "contact-attempt";
-        const data = await fetchData(url, contactFormData);
-
+        createContactAttempt(contactFormData);
         setContactFormData({
           name: "",
           email: "",

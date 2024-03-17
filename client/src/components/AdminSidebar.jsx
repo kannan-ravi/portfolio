@@ -4,22 +4,33 @@ import { MdDashboard } from "react-icons/md";
 import { FaPen, FaUser, FaSignOutAlt, FaHeadphones } from "react-icons/fa";
 import { RiBarChartHorizontalFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { logout } from "../app/features/authSlice";
+import { removeUser } from "../app/features/authSlice";
+import { useLogoutMutation } from "../app/services/authApi";
+import {
+  removeToast,
+  toastError,
+  toastSuccess,
+} from "../app/features/toastSlice";
 
 const AdminSidebar = ({ handleSideBarOpen, isSideBarOpen }) => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [logout, { error }] = useLogoutMutation();
+
   const handleLogout = async () => {
     try {
-      await fetch("api/auth/logout");
-      dispatch(logout());
+      dispatch(removeToast());
+      await logout().unwrap();
+      dispatch(toastSuccess("Successfully Logged Out"));
+      dispatch(removeUser());
       navigate("/login");
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      dispatch(toastError('Something Went Wrong'))
     }
   };
+
   return (
     <div
       className={`fixed top-0 w-64  px-0 pt-10  pb-0 bg-lightblue transition-all duration-300 flex flex-col gap-4 h-screen scrollbar-hide z-10 

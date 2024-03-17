@@ -1,25 +1,12 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { environment } from "../../../api/apiConfig";
 import { FaBackward } from "react-icons/fa";
+import { useGetContactAttemptQuery } from "../../../app/services/contactAttemptApi";
 
 const ViewContactAttempts = () => {
   const { id } = useParams();
-  const [singleContactAttempts, setSingleContactAttempts] = useState([]);
 
-  const fetchSingleContactAttempts = async () => {
-    try {
-      const re = await fetch(`${environment}/api/contact-attempt/${id}`);
-      const data = await re.json();
-      setSingleContactAttempts(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { data } = useGetContactAttemptQuery(id);
 
-  useEffect(() => {
-    fetchSingleContactAttempts();
-  }, []);
   return (
     <main className="px-8 my-10">
       <Link
@@ -32,15 +19,15 @@ const ViewContactAttempts = () => {
       <section className="flex flex-col gap-8">
         <div className="flex flex-col items-start justify-start">
           <p className="mb-1 font-semibold text-slate-200">Name:</p>
-          <p className="text-slate-300">{singleContactAttempts?.name}</p>
+          <p className="text-slate-300">{data?.data?.name}</p>
         </div>
         <div className="flex flex-col items-start justify-start">
           <p className="mb-1 font-semibold text-slate-200">Email:</p>
-          <p className="text-slate-300">{singleContactAttempts?.email}</p>
+          <p className="text-slate-300">{data?.data?.email}</p>
         </div>
         <div className="flex flex-col items-start justify-start">
           <p className="mb-1 font-semibold text-slate-200">Message:</p>
-          <p className="text-slate-300">{singleContactAttempts?.message}</p>
+          <p className="text-slate-300">{data?.data?.message}</p>
         </div>
       </section>
     </main>

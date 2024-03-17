@@ -30,7 +30,10 @@ const login = async (req, res, next) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie("token").status(200).json("Log Out Success");
+  res
+    .clearCookie("token")
+    .status(200)
+    .json(dataHandler.successHandler(200, "Successsfully Logout"));
 };
 
 export default { login, logout };

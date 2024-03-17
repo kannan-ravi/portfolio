@@ -24,6 +24,16 @@ const Nav = () => {
         >
           blog
         </Link>
+        <Link
+          to="/admin"
+          className={`text-white uppercase duration-200 border-b-2 hover:border-cyan-500 ${
+            location.pathname === "/admin"
+              ? "border-cyan-500"
+              : "border-transparent"
+          }`}
+        >
+          admin
+        </Link>
 
         <div className="ps-2">
           {/* <FaSun className="text-2xl text-white cursor-pointer" /> */}
