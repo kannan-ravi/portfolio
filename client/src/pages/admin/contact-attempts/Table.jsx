@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { FaEye, FaTrash, FaPencilAlt } from "react-icons/fa";
+import { FaEye, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const DashboardTable = ({ contactAttemptData, staticData, handleDelete }) => {
+const Table = ({ contactAttemptData, staticData, handleDelete }) => {
   const [searchText, setSearchText] = useState("");
   const [searchData, setSearchData] = useState(contactAttemptData);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -143,4 +143,4 @@ const DashboardTable = ({ contactAttemptData, staticData, handleDelete }) => {
   );
 };
 
-export default DashboardTable;
+export default Table;

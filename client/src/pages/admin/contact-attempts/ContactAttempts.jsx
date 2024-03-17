@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DashboardTable from "../dashboard/DashboardTable";
+import Table from "./Table";
 import { environment } from "../../../api/apiConfig";
 
 const ContactAttempts = () => {
@@ -32,7 +32,7 @@ const ContactAttempts = () => {
   };
   return (
     <div className="px-6 mt-8">
-      <DashboardTable
+      <Table
         contactAttemptData={contactAttemptData}
         staticData={staticData}
         handleDelete={handleDelete}

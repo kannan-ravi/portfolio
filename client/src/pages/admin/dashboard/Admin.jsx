@@ -7,7 +7,6 @@ import {
   FaHeadphones,
   FaHeart,
 } from "react-icons/fa";
-import DashboardTable from "./DashboardTable";
 
 const Admin = () => {
   return (
@@ -67,9 +66,7 @@ const Admin = () => {
           </div>
         </div>
 
-        <div className="px-6 mt-8">
-          {/* <DashboardTable /> */}
-        </div>
+        <div className="px-6 mt-8"></div>
       </div>
     </div>
   );
