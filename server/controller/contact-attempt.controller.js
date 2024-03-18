@@ -66,7 +66,7 @@ const deleteContactAttempt = async (req, res, next) => {
     const deleteContactAttempt = await contactAttemptModel.findByIdAndDelete({
       _id: req.params.id,
     });
-    res.status(200).json(dataHandler.successHandler(deleteContactAttempt));
+    res.status(200).json(dataHandler.successHandler("Successfully Deleted"));
   } catch (error) {
     next(error);
   }

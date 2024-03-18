@@ -1,42 +1,59 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../../app/features/authSlice";
-import Toast from "../../../components/Toast";
 import { useLoginMutation } from "../../../app/services/authApi";
 import {
   removeToast,
   toastError,
   toastSuccess,
 } from "../../../app/features/toastSlice";
+import LoadingBar from "react-top-loading-bar";
+import { endLoader, startLoader } from "../../../app/features/loaderSlice";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [adminData, setAdminData] = useState({});
-  const [toastVisible, setToastVisible] = useState(false);
-  const [login, { isLoading, isError, isSuccess, error }] = useLoginMutation();
+  const [login, { isLoading, error }] = useLoginMutation();
+
+  const loadingBarRef = useRef();
+  const { isLoaderStart, isLoaderComplete } = useSelector(
+    (state) => state.loader
+  );
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setAdminData({ ...adminData, [name]: value });
   };
 
+  useEffect(() => {
+    if (isLoaderStart) {
+      loadingBarRef.current.continuousStart();
+    } else if (isLoaderComplete) {
+      loadingBarRef.current.complete();
+    }
+  }, [isLoaderStart, isLoaderComplete]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(removeToast());
 
     try {
+      dispatch(startLoader());
       const userData = await login(adminData).unwrap();
       dispatch(toastSuccess("Successfully Logged In"));
       dispatch(addUser(userData?.data));
+      dispatch(endLoader());
       navigate("/admin");
     } catch (err) {
       dispatch(toastError(error.data.message));
+      dispatch(endLoader());
     }
   };
   return (
     <main className="scroll-smooth">
+      <LoadingBar color="#f11946" ref={loadingBarRef} />
       <div className="font-sans bg-darkblue text-slate-300 selection:bg-cyan-500 selection:text-black">
         <div className="flex flex-col items-center justify-center min-h-screen px-4 py-10">
           <div className="px-8 py-12 rounded bg-slate-300">
