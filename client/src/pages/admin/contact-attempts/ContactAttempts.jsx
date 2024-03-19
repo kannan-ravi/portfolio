@@ -6,6 +6,7 @@ import {
 import { useDispatch } from "react-redux";
 import { toastError, toastSuccess } from "../../../app/features/toastSlice";
 import { endLoader, startLoader } from "../../../app/features/loaderSlice";
+import { useEffect } from "react";
 
 const ContactAttempts = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,11 @@ const ContactAttempts = () => {
     placeHolder: "Search by Name",
   };
 
-  const { data } = useGetAllContactAttemptQuery();
+  const { data, isFetching } = useGetAllContactAttemptQuery();
+
+  useEffect(() => {
+    isFetching ? dispatch(startLoader()) : dispatch(endLoader());
+  }, [isFetching]);
   const [deleteContactAttempt, { error }] = useDeleteContactAttemptMutation();
   const handleDelete = async (id) => {
     try {

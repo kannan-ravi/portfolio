@@ -1,11 +1,18 @@
 import { Link, useParams } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
 import { useGetContactAttemptQuery } from "../../../app/services/contactAttemptApi";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { endLoader, startLoader } from "../../../app/features/loaderSlice";
 
 const ViewContactAttempts = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const { data, isFetching } = useGetContactAttemptQuery(id);
 
-  const { data } = useGetContactAttemptQuery(id);
+  useEffect(() => {
+    isFetching ? dispatch(startLoader()) : dispatch(endLoader());
+  }, [isFetching]);
 
   return (
     <main className="px-8 my-10">
