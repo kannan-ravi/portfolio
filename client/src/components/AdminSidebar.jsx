@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "/logo.png";
 import { MdDashboard } from "react-icons/md";
-import { FaPen, FaUser, FaSignOutAlt, FaHeadphones } from "react-icons/fa";
+import { FaPen, FaUser, FaSignOutAlt, FaHeadphones, FaLock } from "react-icons/fa";
 import { RiBarChartHorizontalFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../app/features/authSlice";
@@ -45,7 +45,7 @@ const AdminSidebar = ({ handleSideBarOpen, isSideBarOpen }) => {
         onClick={handleSideBarOpen}
       />
 
-      <ul className="flex flex-col flex-grow gap-2 mt-12">
+      <ul className="flex flex-col flex-grow mt-12">
         <li>
           <Link
             to="/admin"
@@ -77,6 +77,17 @@ const AdminSidebar = ({ handleSideBarOpen, isSideBarOpen }) => {
           >
             <FaUser className="text-xl duration-200 lg:text-2xl" />
             Profile
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/admin/login-details"
+            className={`flex items-center justify-start gap-4 py-4 font-medium duration-200 text-md ps-8 text-slate-300 hover:bg-darkblue lg:text-lg ${
+              pathname == "/admin/profile" ? "bg-darkblue" : ""
+            }`}
+          >
+            <FaLock className="text-xl duration-200 lg:text-2xl" />
+            Login Details
           </Link>
         </li>
         <li>

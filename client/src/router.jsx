@@ -1,17 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Blog from "./pages/Blog";
-import AdminLayout from "./routes/AdminLayout";
-import Admin from "./pages/admin/dashboard/Admin";
-import Posts from "./pages/admin/posts/Posts";
-import Profile from "./pages/admin/profile/Profile";
-import EditProfile from "./pages/admin/profile/EditProfile";
-import PageLayout from "./routes/PageLayout";
-import Login from "./pages/admin/login/Login";
-import BlogPost from "./pages/BlogPost";
+import { lazy, Suspense } from "react";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import ContactAttempts from "./pages/admin/contact-attempts/ContactAttempts";
-import ViewContactAttempts from "./pages/admin/contact-attempts/ViewContactAttempts";
+import AdminLayout from "./routes/AdminLayout";
+import PageLayout from "./routes/PageLayout";
+
+import Home from "./pages/home/Home";
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const Admin = lazy(() => import("./pages/admin/dashboard/Admin"));
+const Posts = lazy(() => import("./pages/admin/posts/Posts"));
+const Profile = lazy(() => import("./pages/admin/profile/Profile"));
+const EditProfile = lazy(() => import("./pages/admin/profile/EditProfile"));
+const Login = lazy(() => import("./pages/admin/login/Login"));
+const ContactAttempts = lazy(() =>
+  import("./pages/admin/contact-attempts/ContactAttempts")
+);
+const ViewContactAttempts = lazy(() =>
+  import("./pages/admin/contact-attempts/ViewContactAttempts")
+);
+const LoginDetails = lazy(() =>
+  import("./pages/admin/login-details/LoginDetails")
+);
 
 const router = createBrowserRouter([
   {
@@ -25,11 +34,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/blog",
-        element: <Blog />,
+        element: (
+          <Suspense>
+            <Blog />
+          </Suspense>
+        ),
       },
       {
         path: "/post",
-        element: <BlogPost />,
+        element: (
+          <Suspense>
+            <BlogPost />
+          </Suspense>
+        ),
       },
     ],
   },
@@ -45,27 +62,59 @@ const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <Admin />,
+            element: (
+              <Suspense fallback="loading...">
+                <Admin />
+              </Suspense>
+            ),
           },
           {
             path: "/admin/posts",
-            element: <Posts />,
+            element: (
+              <Suspense>
+                <Posts />
+              </Suspense>
+            ),
           },
           {
             path: "/admin/profile",
-            element: <Profile />,
+            element: (
+              <Suspense>
+                <Profile />
+              </Suspense>
+            ),
           },
           {
             path: "/admin/profile/edit",
-            element: <EditProfile />,
+            element: (
+              <Suspense>
+                <EditProfile />
+              </Suspense>
+            ),
+          },
+          {
+            path: "/admin/login-details",
+            element: (
+              <Suspense>
+                <LoginDetails />
+              </Suspense>
+            ),
           },
           {
             path: "/admin/contact-attempts",
-            element: <ContactAttempts />,
+            element: (
+              <Suspense>
+                <ContactAttempts />
+              </Suspense>
+            ),
           },
           {
             path: "/admin/contact-attempts/:id",
-            element: <ViewContactAttempts />,
+            element: (
+              <Suspense>
+                <ViewContactAttempts />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -74,7 +123,11 @@ const router = createBrowserRouter([
 
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <Suspense>
+        <Login />
+      </Suspense>
+    ),
   },
 ]);
 

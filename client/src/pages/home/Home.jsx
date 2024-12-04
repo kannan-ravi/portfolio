@@ -8,8 +8,10 @@ import {
   FaLinkedin,
   FaReact,
   FaNodeJs,
+  FaArrowRight,
+  FaArrowAltCircleRight,
 } from "react-icons/fa";
-import { SiTailwindcss, SiMongodb, SiExpress } from "react-icons/si";
+import { SiTailwindcss, SiMongodb, SiExpress, SiMui } from "react-icons/si";
 import Footer from "../../components/Footer";
 import ExperienceCard from "../../components/ExperienceCard";
 import ProjectCard from "../../components/ProjectCard";
@@ -17,6 +19,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import ContactForm from "./ContactForm";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   useGSAP(() => {
@@ -43,6 +46,12 @@ const Home = () => {
         selector: ".linkedin-icon",
         y: 10,
         duration: 0.2,
+        ease: "Elastic.inOut",
+      },
+      {
+        selector: ".resume-button",
+        y: 10,
+        duration: 0.4,
         ease: "Elastic.inOut",
       },
     ];
@@ -90,13 +99,6 @@ const Home = () => {
   return (
     <main className="scroll-smooth">
       <div className="font-sans bg-darkblue text-slate-300 selection:bg-cyan-500 selection:text-black">
-        {/* RESUME BUTTON */}
-        {/* <a
-          href=""
-          className="fixed hidden px-2 py-4 text-2xl font-bold tracking-wider uppercase duration-200 -translate-y-1/2 border rounded right-20 top-2/4 bg-lightblue hover:bg-slate-300 hover:text-lightblue text-slate-300 border-slate-300 lg:block vertical-rl"
-        >
-          resume
-        </a> */}
         {/* HERO SECTION */}
         <div className="flex flex-col items-center justify-center h-screen px-4 py-10">
           <h1 className="text-5xl font-bold text-center sm:text-6xl name">
@@ -127,6 +129,14 @@ const Home = () => {
               <FaLinkedin className="text-3xl duration-200 hover:text-slate-500 linkedin-icon" />
             </a>
           </div>
+
+          {/* RESUME BUTTON */}
+          <a
+            href=""
+            className="px-6 py-1 mt-8 text-xl font-light tracking-wider uppercase duration-200 border rounded cursor-pointer right-20 bg-lightblue hover:bg-slate-300 hover:text-lightblue text-slate-300 border-slate-300 resume-button"
+          >
+            resume
+          </a>
         </div>
 
         {/* ABOUT SECTION */}
@@ -168,11 +178,12 @@ const Home = () => {
               <FaCss3Alt className="text-5xl text-blue-600 duration-200 cursor-pointer hover:text-opacity-80" />
               <FaJs className="text-5xl text-yellow-300 duration-200 cursor-pointer hover:text-opacity-80" />
               <FaBootstrap className="text-5xl text-purple-600 duration-200 cursor-pointer hover:text-opacity-80" />
-              <SiTailwindcss className="text-5xl text-teal-500 duration-200 cursor-pointer hover:text-opacity-80" />
-              <SiMongodb className="text-5xl text-green-500 duration-200 cursor-pointer hover:text-opacity-80" />
-              <SiExpress className="text-5xl text-red-100 duration-200 cursor-pointer hover:text-opacity-80" />
               <FaReact className="text-5xl text-blue-400 duration-200 cursor-pointer hover:text-opacity-80" />
+              <SiTailwindcss className="text-5xl text-teal-500 duration-200 cursor-pointer hover:text-opacity-80" />
+              <SiMui className="text-5xl text-blue-500 duration-200 cursor-pointer hover:text-opacity-80" />
               <FaNodeJs className="text-5xl text-green-700 duration-200 cursor-pointer hover:text-opacity-80" />
+              <SiExpress className="text-5xl text-red-100 duration-200 cursor-pointer hover:text-opacity-80" />
+              <SiMongodb className="text-5xl text-green-500 duration-200 cursor-pointer hover:text-opacity-80" />
             </div>
           </div>
         </section>
@@ -189,6 +200,10 @@ const Home = () => {
             <div className="mt-6 space-y-6">
               <div className="flex flex-col items-center justify-center gap-10">
                 <ExperienceCard />
+              </div>
+              <div className="flex flex-row items-center gap-2 border-b w-fit">
+                <Link to="/">View More</Link>
+                <FaArrowAltCircleRight className="text-sm text-slate-300" />
               </div>
             </div>
           </div>

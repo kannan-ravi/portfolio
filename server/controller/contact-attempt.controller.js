@@ -30,6 +30,7 @@ const saveContactAttempt = async (req, res, next) => {
         .status(200)
         .json(
           dataHandler.successHandler(
+            null,
             "Your message has been successfully received"
           )
         );
@@ -42,7 +43,12 @@ const saveContactAttempt = async (req, res, next) => {
 const getAllContactAttempt = async (req, res, next) => {
   try {
     const getContactAttempt = await contactAttemptModel.find();
-    res.json(dataHandler.successHandler(getContactAttempt));
+    res.json(
+      dataHandler.successHandler(
+        getContactAttempt,
+        "Successfully Retrieved Contact"
+      )
+    );
   } catch (error) {
     next(error);
   }
@@ -55,7 +61,14 @@ const getSingleContactAttempt = async (req, res, next) => {
     const getSingleContactAttempt = await contactAttemptModel.findOne({
       _id: id,
     });
-    res.status(200).json(dataHandler.successHandler(getSingleContactAttempt));
+    res
+      .status(200)
+      .json(
+        dataHandler.successHandler(
+          getSingleContactAttempt,
+          "Successfully Retrieved"
+        )
+      );
   } catch (error) {
     next(error);
   }
@@ -66,7 +79,9 @@ const deleteContactAttempt = async (req, res, next) => {
     const deleteContactAttempt = await contactAttemptModel.findByIdAndDelete({
       _id: req.params.id,
     });
-    res.status(200).json(dataHandler.successHandler("Successfully Deleted"));
+    res
+      .status(200)
+      .json(dataHandler.successHandler(null, "Successfully Deleted"));
   } catch (error) {
     next(error);
   }

@@ -4,15 +4,13 @@ import contactAttemptController from "../controller/contact-attempt.controller.j
 const router = express.Router();
 
 router
-  .route("/contact-attempt")
+  .route("/")
   .get(contactAttemptController.getAllContactAttempt)
   .post(contactAttemptController.saveContactAttempt);
 
 router
-  .route("/contact-attempt/:id")
+  .route("/:id")
+  .get(contactAttemptController.getSingleContactAttempt)
   .delete(contactAttemptController.deleteContactAttempt);
-router
-  .route("/contact-attempt/:id")
-  .get(contactAttemptController.getSingleContactAttempt);
 
 export default router;

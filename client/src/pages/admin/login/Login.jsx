@@ -47,7 +47,12 @@ const Login = () => {
       dispatch(endLoader());
       navigate("/admin");
     } catch (err) {
-      dispatch(toastError(error.data.message));
+      if (!err.data.success) {
+        dispatch(toastError(err.data.message));
+      } else {
+        console.log(err);
+      }
+    } finally {
       dispatch(endLoader());
     }
   };

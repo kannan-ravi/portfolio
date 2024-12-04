@@ -23,17 +23,60 @@ const login = async (req, res, next) => {
     res
       .cookie("token", token, { httpOnly: true, expires: expireDate })
       .status(200)
-      .json(dataHandler.successHandler(rest));
+      .json(dataHandler.successHandler(rest, "Logged in Successfully"));
   } catch (err) {
     next(err);
   }
 };
 
+const passwordChange = async (req, res, next) => {
+  const { new_password, old_password, username } = req.body;
+  try {
+    if (new_password !== "" && old_password !== "" && username !== "") {
+      const validUser = await authModel.findOne({ username: username });
+
+      if (!validUser) {
+        return next(
+          dataHandler.customErrorHandler(404, "Couldn't find the user")
+        );
+      }
+
+      const validPassword = bcrypt.compareSync(
+        old_password,
+        validUser.password
+      );
+
+      if (!validPassword) {
+        return next(
+          dataHandler.customErrorHandler(404, "Incorrect Credentials")
+        );
+      }
+
+      const hashedPassword = await bcrypt.hash(new_password, 11);
+
+      validUser.password = hashedPassword;
+      await validUser.save();
+
+      return res
+        .status(200)
+        .json(
+          dataHandler.successHandler(
+            null,
+            "Your Password has been successfully changed"
+          )
+        );
+    } else {
+      next(dataHandler.customErrorHandler(422, "Please enter your password"));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 const logout = (req, res) => {
   res
     .clearCookie("token")
     .status(200)
-    .json(dataHandler.successHandler(200, "Successsfully Logout"));
+    .json(dataHandler.successHandler(null, "Successsfully Logout"));
 };
 
-export default { login, logout };
+export default { login, passwordChange, logout };

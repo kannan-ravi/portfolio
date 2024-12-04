@@ -17,9 +17,10 @@ const customErrorHandler = (statusCode, message) => {
   return error;
 };
 
-const successHandler = (data) => {
+const successHandler = (data, message) => {
   const successTemplate = {
     success: true,
+    message: message,
     data: data,
   };
 
