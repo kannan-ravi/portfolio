@@ -1,40 +1,51 @@
 import { useState } from "react";
 import { useCreateContactAttemptMutation } from "../../app/services/contactAttemptApi";
-
+import { useDispatch, useSelector } from "react-redux";
+import { removeToast, toastSuccess } from "../../app/features/toastSlice";
+import { endLoader, startLoader } from "../../app/features/loaderSlice";
 
 const ContactForm = () => {
-
   const [contactFormData, setContactFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const [createContactAttempt] = useCreateContactAttemptMutation();
-
+  const [createContactAttempt, { isLoading }] =
+    useCreateContactAttemptMutation();
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setContactFormData({ ...contactFormData, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    dispatch(removeToast());
     if (
       contactFormData.name &&
       contactFormData.email &&
       contactFormData.message
     ) {
       try {
-        createContactAttempt(contactFormData);
+        dispatch(startLoader());
+        const response = await createContactAttempt(contactFormData).unwrap();
+        dispatch(toastSuccess(response.message));
         setContactFormData({
           name: "",
           email: "",
           message: "",
         });
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        if (!err.data.success) {
+          dispatch(toastError(err.data.message));
+        } else {
+          console.log(err);
+        }
+      } finally {
+        dispatch(endLoader());
       }
     } else {
-      console.log("Please fill all the fields");
+      dispatch(toastError("Please fill all the fields"));
     }
   };
   return (
@@ -75,7 +86,7 @@ const ContactForm = () => {
             className="py-2 px-4 rounded-md bg-[#4A5568] text-white hover:opacity-85 duration-200"
             type="submit"
           >
-            Submit
+            {isLoading ? "Loading..." : "Submit"}
           </button>
         </form>
       </div>

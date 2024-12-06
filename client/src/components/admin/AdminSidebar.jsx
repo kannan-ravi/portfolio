@@ -4,13 +4,13 @@ import { MdDashboard } from "react-icons/md";
 import { FaPen, FaUser, FaSignOutAlt, FaHeadphones, FaLock } from "react-icons/fa";
 import { RiBarChartHorizontalFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { removeUser } from "../app/features/authSlice";
-import { useLogoutMutation } from "../app/services/authApi";
+import { removeUser } from "../../app/features/authSlice";
+import { useLogoutMutation } from "../../app/services/authApi";
 import {
   removeToast,
   toastError,
   toastSuccess,
-} from "../app/features/toastSlice";
+} from "../../app/features/toastSlice";
 
 const AdminSidebar = ({ handleSideBarOpen, isSideBarOpen }) => {
   const { pathname } = useLocation();
@@ -83,7 +83,7 @@ const AdminSidebar = ({ handleSideBarOpen, isSideBarOpen }) => {
           <Link
             to="/admin/login-details"
             className={`flex items-center justify-start gap-4 py-4 font-medium duration-200 text-md ps-8 text-slate-300 hover:bg-darkblue lg:text-lg ${
-              pathname == "/admin/profile" ? "bg-darkblue" : ""
+              pathname == "/admin/login-details" ? "bg-darkblue" : ""
             }`}
           >
             <FaLock className="text-xl duration-200 lg:text-2xl" />

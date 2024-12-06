@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import AdminSidebar from "../../../components/AdminSidebar";
-import SidebarHeader from "../../../components/SidebarHeader";
 
 import Logo from "/logo.png";
 import { Link } from "react-router-dom";

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Footer from "../components/Footer";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);

@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
-import AdminSidebar from "../components/AdminSidebar";
-import SidebarHeader from "../components/SidebarHeader";
+import AdminSidebar from "../components/admin/AdminSidebar";
+import SidebarHeader from "../components/admin/SidebarHeader";
 import Footer from "../components/Footer";
-// import LoadingBar from "../components/LoadingBar";
 import LoadingBar from "react-top-loading-bar";
 import { useSelector } from "react-redux";
 

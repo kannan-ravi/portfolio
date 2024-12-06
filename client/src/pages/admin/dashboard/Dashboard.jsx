@@ -1,6 +1,4 @@
 import { useState } from "react";
-import AdminSidebar from "../../../components/AdminSidebar";
-import SidebarHeader from "../../../components/SidebarHeader";
 import {
   FaCloudDownloadAlt,
   FaEye,
@@ -8,7 +6,7 @@ import {
   FaHeart,
 } from "react-icons/fa";
 
-const Admin = () => {
+const Dashboard = () => {
   return (
     <div>
       <div className="pt-10 pb-20">
@@ -72,4 +70,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Dashboard;

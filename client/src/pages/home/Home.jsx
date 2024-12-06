@@ -12,13 +12,12 @@ import {
   FaArrowAltCircleRight,
 } from "react-icons/fa";
 import { SiTailwindcss, SiMongodb, SiExpress, SiMui } from "react-icons/si";
-import Footer from "../../components/Footer";
-import ExperienceCard from "../../components/ExperienceCard";
-import ProjectCard from "../../components/ProjectCard";
+import ExperienceCard from "../../components/experience/ExperienceCard";
+import ProjectCard from "../../components/projects/ProjectCard";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
-import ContactForm from "./ContactForm";
+import ContactForm from "../../components/contact-attempt/ContactForm";
 import { Link } from "react-router-dom";
 
 const Home = () => {

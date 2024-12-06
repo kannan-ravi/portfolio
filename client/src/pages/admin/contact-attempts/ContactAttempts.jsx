@@ -1,4 +1,4 @@
-import Table from "./Table";
+import Table from "../../../components/admin/contact-attempt/Table";
 import {
   useDeleteContactAttemptMutation,
   useGetAllContactAttemptQuery,
@@ -15,7 +15,7 @@ const ContactAttempts = () => {
     placeHolder: "Search by Name",
   };
 
-  const { data, isFetching } = useGetAllContactAttemptQuery();
+  const { data, isFetching, refetch } = useGetAllContactAttemptQuery();
 
   useEffect(() => {
     isFetching ? dispatch(startLoader()) : dispatch(endLoader());
@@ -25,18 +25,19 @@ const ContactAttempts = () => {
     try {
       dispatch(startLoader());
       const deleteContact = await deleteContactAttempt(id);
-      dispatch(toastSuccess(deleteContact.data.data));
+      dispatch(toastSuccess(deleteContact.data.message));
       dispatch(endLoader());
     } catch (err) {
       dispatch(toastError(error));
     }
   };
   return (
-    <div className="px-6 mt-8">
+    <div className="px-6 my-8 h-[calc(100vh-240px)]">
       <Table
         contactAttemptData={data?.data || []}
         staticData={staticData}
         handleDelete={handleDelete}
+        refetch={refetch}
       />
     </div>
   );

@@ -1,8 +1,5 @@
 import { useState } from "react";
-import SidebarHeader from "../../../components/SidebarHeader";
-import AdminSidebar from "../../../components/AdminSidebar";
 import { Link } from "react-router-dom";
-import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const Posts = () => {
   return (

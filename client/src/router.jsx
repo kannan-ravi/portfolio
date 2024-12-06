@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import AdminLayout from "./routes/AdminLayout";
-import PageLayout from "./routes/PageLayout";
+import AdminLayout from "./layouts/AdminLayout";
+import PageLayout from "./layouts/PageLayout";
 
 import Home from "./pages/home/Home";
-const Blog = lazy(() => import("./pages/Blog"));
-const BlogPost = lazy(() => import("./pages/BlogPost"));
-const Admin = lazy(() => import("./pages/admin/dashboard/Admin"));
+const NotFound = lazy(() => import("./NotFound"))
+const Blog = lazy(() => import("./pages/blog/Blog"));
+const BlogPost = lazy(() => import("./pages/blog-post/BlogPost"));
+const Dashboard = lazy(() => import("./pages/admin/dashboard/Dashboard"));
 const Posts = lazy(() => import("./pages/admin/posts/Posts"));
 const Profile = lazy(() => import("./pages/admin/profile/Profile"));
 const EditProfile = lazy(() => import("./pages/admin/profile/EditProfile"));
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <PageLayout />,
-    errorElement: <div>Not Found</div>,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
             path: "",
             element: (
               <Suspense fallback="loading...">
-                <Admin />
+                <Dashboard />
               </Suspense>
             ),
           },

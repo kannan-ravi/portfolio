@@ -30,9 +30,9 @@ const login = async (req, res, next) => {
 };
 
 const passwordChange = async (req, res, next) => {
-  const { new_password, old_password, username } = req.body;
+  const { new_password, current_password, username } = req.body;
   try {
-    if (new_password !== "" && old_password !== "" && username !== "") {
+    if (new_password !== "" && current_password !== "" && username !== "") {
       const validUser = await authModel.findOne({ username: username });
 
       if (!validUser) {
@@ -42,7 +42,7 @@ const passwordChange = async (req, res, next) => {
       }
 
       const validPassword = bcrypt.compareSync(
-        old_password,
+        current_password,
         validUser.password
       );
 

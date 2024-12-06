@@ -10,6 +10,14 @@ const extendedAuthApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "auth/password-change",
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
     logout: builder.mutation({
       query: () => ({
         url: "auth/logout",
@@ -19,4 +27,8 @@ const extendedAuthApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = extendedAuthApi;
+export const {
+  useLoginMutation,
+  useChangePasswordMutation,
+  useLogoutMutation,
+} = extendedAuthApi;

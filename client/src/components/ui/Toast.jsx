@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { MdError, MdCheckCircle, MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { removeToast } from "../app/features/toastSlice";
+import { removeToast } from "../../app/features/toastSlice";
 
 const Toast = () => {
   const { isToastVisible, toastMessage, isToastSuccess, isToastError } =
@@ -24,7 +24,7 @@ const Toast = () => {
 
   return (
     <div
-      className={`absolute  left-2/4 -translate-x-2/4 min-w-max duration-200 z-20 border-2 ${
+      className={`fixed left-2/4 -translate-x-2/4 min-w-max duration-200 bg-darkblue z-20 border-2 ${
         isToastVisible ? "top-6" : "-top-10"
       } ${
         isToastSuccess

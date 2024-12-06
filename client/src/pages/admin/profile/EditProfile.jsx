@@ -43,17 +43,17 @@ const EditProfile = () => {
                 </label>
               </div>
               <div className="md:col-span-2">
-                <label htmlFor="logo_image" className="text-base">
+                <label htmlFor="profile_image" className="text-base">
                   Profile Picture
                 </label>
                 <label
                   className="flex items-center justify-center w-full mt-2 rounded-xl h-28 bg-darkblue"
-                  htmlFor="logo_image"
+                  htmlFor="profile_image"
                 >
                   <input
                     type="file"
-                    name="logo_image"
-                    id="logo_image"
+                    name="profile_image"
+                    id="profile_image"
                     className="hidden w-full h-10 py-4 mt-2bg-lightblue"
                     placeholder="Full Name"
                   />

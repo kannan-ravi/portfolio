@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaEye, FaTrash } from "react-icons/fa";
+import { MdRefresh } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const Table = ({ contactAttemptData, staticData, handleDelete }) => {
+const Table = ({ contactAttemptData, staticData, handleDelete, refetch }) => {
   const [searchText, setSearchText] = useState("");
   const [searchData, setSearchData] = useState(contactAttemptData);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -23,6 +24,8 @@ const Table = ({ contactAttemptData, staticData, handleDelete }) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = searchData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleRefresh = () => refetch();
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -47,7 +50,8 @@ const Table = ({ contactAttemptData, staticData, handleDelete }) => {
               <option value={50}>50</option>
             </select>
           </div>
-          <div className="relative flex items-center w-full md:w-72">
+          <div className="relative flex items-center w-full gap-4 md:w-72">
+            <MdRefresh className="text-4xl cursor-pointer" onClick={handleRefresh} />
             <input
               className="peer h-full w-full rounded-[7px] bg-transparent px-3 py-2.5 text-sm font-normal transition-all border-2 border-slate-500 outline-0 focus:border-slate-200 focus:placeholder:text-slate-200"
               placeholder={staticData.placeHolder}
