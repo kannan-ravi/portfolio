@@ -74,19 +74,6 @@ const EditProfile = () => {
               </div>
 
               <div className="md:col-span-5">
-                <label htmlFor="username" className="text-base">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  className="w-full h-10 px-4 mt-2 border rounded bg-lightblue"
-                  placeholder="Username"
-                />
-              </div>
-
-              <div className="md:col-span-5">
                 <label htmlFor="email" className="text-base">
                   Email Address
                 </label>
@@ -101,41 +88,15 @@ const EditProfile = () => {
 
               <div className="md:col-span-5">
                 <label htmlFor="description" className="text-base">
-                  Descripton
+                  Headline
                 </label>
                 <textarea
-                  name="description"
+                  name="headline"
                   id=""
                   rows="4"
-                  placeholder="Description"
+                  placeholder="Headline"
                   className="w-full px-4 py-4 mt-2 border rounded bg-lightblue"
                 ></textarea>
-              </div>
-
-              <div className="md:col-span-3">
-                <label htmlFor="password" className="text-base">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  className="w-full h-10 px-4 mt-2 border rounded bg-lightblue"
-                  placeholder="Password"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label htmlFor="confirm_password" className="text-base">
-                  Confirm Password
-                </label>
-                <input
-                  type="text"
-                  name="confirm_password"
-                  id="confirm_password"
-                  className="w-full h-10 px-4 mt-2 border rounded bg-lightblue"
-                  placeholder="Confirm Your Password"
-                />
               </div>
 
               <div className="md:col-span-3">
@@ -211,9 +172,6 @@ const EditProfile = () => {
             </button>
           </div>
         </div>
-        <small className="w-100 text-slate-200">
-          Make sure you enter your password correctly.
-        </small>
       </form>
     </div>
   );

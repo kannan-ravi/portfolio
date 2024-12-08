@@ -2,21 +2,21 @@ import mongoose, { Schema } from "mongoose";
 
 const profileSchema = new Schema(
   {
-    full_name: { type: String, required: true },
-    credentials: { type: mongoose.Schema.Types.ObjectId, ref: "Auth" },
-    email: { type: String, required: true },
-    description: { type: String, required: true },
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    full_name: { type: String },
+    email: { type: String },
+    headline: { type: String },
     profile_pic: { type: String },
-    logo: { type: String, required: true },
-    skills: { type: Array, required: true },
+    logo: { type: String },
     address: { type: String },
-    country: { type: String },
     state: { type: String },
     city: { type: String },
+    country: { type: String },
     zipcode: { type: String },
   },
   { timestamps: true }
 );
 
-const profileModel = mongoose.model("admin", profileSchema);
+const profileModel = mongoose.model("profile", profileSchema);
 export default profileModel;

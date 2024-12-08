@@ -18,9 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 connectDB();
 
-app.get("/", (req, res) => {
-  res.send("Please check the api route for the data");
-});
+app.use(express.static("./server/public"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/contact-attempt", contactAttemptRouter);

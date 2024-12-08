@@ -1,17 +1,16 @@
 import dataHandler from "../middleware/dataHandler.js";
-import authModel from "../model/auth.model.js";
+import profileModel from "../model/profile.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const login = async (req, res, next) => {
   const { password, username } = req.body;
   try {
-    const validUser = await authModel.findOne({ username });
+    const validUser = await profileModel.findOne({ username });
 
     if (!validUser) {
       return next(dataHandler.customErrorHandler(404, "Incorrect Credentials"));
     }
-
     const validPassword = bcrypt.compareSync(password, validUser.password);
     if (!validPassword) {
       return next(dataHandler.customErrorHandler(401, "Incorrect Credentials"));
@@ -33,7 +32,7 @@ const passwordChange = async (req, res, next) => {
   const { new_password, current_password, username } = req.body;
   try {
     if (new_password !== "" && current_password !== "" && username !== "") {
-      const validUser = await authModel.findOne({ username: username });
+      const validUser = await profileModel.findOne({ username: username });
 
       if (!validUser) {
         return next(
@@ -72,9 +71,10 @@ const passwordChange = async (req, res, next) => {
     next(error);
   }
 };
+
 const logout = (req, res) => {
   res
-    .clearCookie("token")
+    .clearCookie("token", { httpOnly: true, secure: true })
     .status(200)
     .json(dataHandler.successHandler(null, "Successsfully Logout"));
 };
