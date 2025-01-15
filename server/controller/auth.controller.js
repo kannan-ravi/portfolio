@@ -47,7 +47,7 @@ const passwordChange = async (req, res, next) => {
 
       if (!validPassword) {
         return next(
-          dataHandler.customErrorHandler(404, "Incorrect Credentials")
+          dataHandler.customErrorHandler(401, "Incorrect Credentials")
         );
       }
 
@@ -61,7 +61,7 @@ const passwordChange = async (req, res, next) => {
         .json(
           dataHandler.successHandler(
             null,
-            "Your Password has been successfully changed"
+            "Password changed"
           )
         );
     } else {

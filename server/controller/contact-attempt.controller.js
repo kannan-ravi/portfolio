@@ -4,16 +4,10 @@ import contactAttemptModel from "../model/contact-attempt.model.js";
 const saveContactAttempt = async (req, res, next) => {
   const { name, email, message } = req.body;
 
-  if (!name) {
-    return next(dataHandler.customErrorHandler(422, "Name is Missing"));
-  }
-
-  if (!email) {
-    return next(dataHandler.customErrorHandler(422, "Email is Missing"));
-  }
-
-  if (!message) {
-    return next(dataHandler.customErrorHandler(422, "Message is Missing"));
+  if (!name || !email || !message) {
+    return next(
+      dataHandler.customErrorHandler(422, "Please fill the necessary details")
+    );
   }
 
   try {
@@ -30,7 +24,7 @@ const saveContactAttempt = async (req, res, next) => {
         .status(200)
         .json(
           dataHandler.successHandler(
-            null,
+            saveData,
             "Your message has been successfully received"
           )
         );
@@ -57,10 +51,19 @@ const getAllContactAttempt = async (req, res, next) => {
 const getSingleContactAttempt = async (req, res, next) => {
   const { id } = req.params;
 
+  if (!id) {
+    return next(dataHandler.customErrorHandler(422, "'id' is missing"));
+  }
+
   try {
-    const getSingleContactAttempt = await contactAttemptModel.findOne({
-      _id: id,
-    });
+    const getSingleContactAttempt = await contactAttemptModel.findById(id);
+
+    if (!getSingleContactAttempt) {
+      return next(
+        dataHandler.customErrorHandler(404, "Contact Attempt not found")
+      );
+    }
+
     res
       .status(200)
       .json(

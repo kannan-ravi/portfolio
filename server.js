@@ -27,9 +27,21 @@ app.use("/api/profile", profileRouter);
 app.use("/api/skill", skillRouter);
 
 app.use(errorHandler.defaultErrorHandle);
-mongoose.connection.once("open", () => {
-  console.log("MongoDB database connection established successfully");
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+
+if (require.main === module) {
+  mongoose.connection.once("open", () => {
+    console.log("MongoDB database connection established successfully");
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
   });
-});
+}
+
+// mongoose.connection.once("open", () => {
+//   console.log("MongoDB database connection established successfully");
+//   app.listen(PORT, () => {
+//     console.log(`Server is running on http://localhost:${PORT}`);
+//   });
+// });
+
+export default app;
