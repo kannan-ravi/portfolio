@@ -7,6 +7,7 @@ const profileSchema = new Schema(
     full_name: { type: String },
     email: { type: String },
     headline: { type: String },
+    about_me: { type: String },
     profile_pic: { type: String },
     logo: { type: String },
     address: { type: String },

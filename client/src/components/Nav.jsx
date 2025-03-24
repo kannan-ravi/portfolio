@@ -6,7 +6,7 @@ const Nav = () => {
   return (
     <nav className="container absolute right-0 sm:right-16 top-10 selection:bg-cyan-500 selection:text-black">
       <div className="flex justify-center w-full space-x-6 sm:justify-end sm:mx-auto">
-        <Link
+        {/* <Link
           to="/"
           className={`text-white uppercase duration-200 border-b-2 hover:border-cyan-500 ${
             location.pathname === "/" ? "border-cyan-500" : "border-transparent"
@@ -23,11 +23,11 @@ const Nav = () => {
           }`}
         >
           blog
-        </Link>
+        </Link> */}
 
         <div className="ps-2">
           {/* <FaSun className="text-2xl text-white cursor-pointer" /> */}
-          <FaMoon className="text-2xl text-white cursor-pointer" />
+          {/* <FaMoon className="text-2xl text-white cursor-pointer" /> */}
         </div>
       </div>
     </nav>

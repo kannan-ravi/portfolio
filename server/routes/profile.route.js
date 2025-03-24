@@ -12,6 +12,7 @@ const listOfFields = [
 
 router
   .route("/")
+  .get(verifyJWT, profileContoller.getProfile)
   .patch(
     verifyJWT,
     fileHandler.upload.fields(listOfFields),

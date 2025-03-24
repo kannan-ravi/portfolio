@@ -2,7 +2,7 @@ import multer from "multer";
 import path from "path";
 
 const __dirname = path.resolve();
-const storageForLogo = multer.diskStorage({
+const storageForProfile = multer.diskStorage({
   destination: (req, file, cb) => {
     let folderPath;
     if (file.fieldname === "logo") {
@@ -23,6 +23,6 @@ const storageForLogo = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storageForLogo });
+const upload = multer({ storage: storageForProfile });
 
 export default { upload };

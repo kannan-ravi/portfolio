@@ -4,10 +4,12 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
 import connectDB from "./server/config/dbConn.js";
+import homeRouter from "./server/routes/home.route.js";
 import authRouter from "./server/routes/auth.route.js";
 import contactAttemptRouter from "./server/routes/contact-attempt.route.js";
 import profileRouter from "./server/routes/profile.route.js";
 import skillRouter from "./server/routes/skill.route.js";
+import experienceRouter from "./server/routes/experience.route.js";
 import errorHandler from "./server/middleware/dataHandler.js";
 dotenv.config();
 
@@ -21,27 +23,29 @@ connectDB();
 
 app.use(express.static("./server/public"));
 
+app.use("/api/home", homeRouter)
 app.use("/api/auth", authRouter);
 app.use("/api/contact-attempt", contactAttemptRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/skill", skillRouter);
+app.use("/api/experience", experienceRouter);
 
 app.use(errorHandler.defaultErrorHandle);
 
-if (require.main === module) {
-  mongoose.connection.once("open", () => {
-    console.log("MongoDB database connection established successfully");
-    app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
-    });
-  });
-}
-
-// mongoose.connection.once("open", () => {
-//   console.log("MongoDB database connection established successfully");
-//   app.listen(PORT, () => {
-//     console.log(`Server is running on http://localhost:${PORT}`);
+// if (require.main === module) {
+//   mongoose.connection.once("open", () => {
+//     console.log("MongoDB database connection established successfully");
+//     app.listen(PORT, () => {
+//       console.log(`Server is running on http://localhost:${PORT}`);
+//     });
 //   });
-// });
+// }
+
+mongoose.connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+});
 
 export default app;

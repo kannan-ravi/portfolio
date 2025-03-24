@@ -13,7 +13,6 @@ const normalizePath = (file) => {
 };
 
 const updateProfile = async (req, res, next) => {
-  console.log(req.files);
   try {
     const normalizedPathForLogo = req.files.logo
       ? normalizePath(req.files.logo[0])
@@ -59,4 +58,49 @@ const updateProfile = async (req, res, next) => {
   }
 };
 
-export default { updateProfile };
+const getProfile = async (req, res, next) => {
+  try {
+    const profile = await profileModel.find();
+    res.json(
+      dataHandler.successHandler(profile, "Successfully Retrieved Profile")
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateprofile = async (req, res, next) => {
+  try {
+    const profileUpdate = await profileModel.findOneAndUpdate(
+      {
+        id: req.params.id,
+      },
+      {
+        $set: {
+          full_name: req.body.full_name,
+          email: req.body.email,
+          headline: req.body.headline,
+          address: req.body.address,
+          city: req.body.city,
+          country: req.body.country,
+          state: req.body.state,
+          zipcode: req.body.zipcode,
+          about_me: req.body.about_me,
+        },
+      }
+    );
+
+    res
+      .status(200)
+      .json(
+        dataHandler.successHandler(
+          profileUpdate,
+          "Profile has been updated successfully"
+        )
+      );
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { updateProfile, getProfile };

@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 
 import Logo from "/logo.png";
 import { Link } from "react-router-dom";
+import { useGetProfileQuery } from "../../../app/services/profileApi";
 
 const Profile = () => {
+  const { data, error, isLoading } = useGetProfileQuery();
+
   return (
     <div className="px-10 pb-20">
       <div className="px-5 py-8 mt-24 shadow md:p-8 bg-lightblue">
@@ -34,43 +37,25 @@ const Profile = () => {
         </div>
         <div className="pb-12 mt-10 text-center border-b md:mt-20">
           <h1 className="text-2xl font-medium lg:text-4xl text-slate-200 md:text-3xl">
-            Kannan Ravindran
+            {data?.data[0].full_name}
           </h1>
           <p className="mt-3 text-sm font-light text-slate-200 sm:text-base">
-            Erode, Tamil Nadu
+            {data?.data[0].address}
+          </p>
+          <p className="mt-3 text-sm font-light text-slate-200 sm:text-base">
+            {data?.data[0].city}, {data?.data[0].state}, {data?.data[0].country}{" "}
+            -{" "}{data?.data[0].zipcode}
           </p>
           <p className="mt-8 text-sm text-slate-200 sm:text-base">
-            Full Stack Developer - Adetive Solutions
+            Email: {data?.data[0].email}
           </p>
           <p className="mt-2 text-sm text-slate-200 sm:text-base">
-            Karpagam Institute of Technology, Coimbatore
+            {data?.data[0].headline}
           </p>
         </div>
         <div className="flex flex-col justify-center mt-12">
           <p className="mt-4 text-sm font-light text-center text-slate-200 lg:px-16 sm:text-base">
-            Hey there! I'm someone passionate about the world of{" "}
-            <strong>Web Development</strong>. It all began with Python, but as I
-            dug deeper, I found my true love for building things online.
-            Starting withn
-            <strong> HTML, CSS, and JavaScript</strong>, I quickly moved on to
-            <strong> React.js</strong> and got intrigued by the backend, diving
-            into
-            <strong> Node.js</strong>.
-          </p>
-          <p className="mt-4 text-sm font-light text-center text-slate-200 lg:px-16 sm:text-base">
-            My focus? <strong>Constant learning</strong>. I'm all about putting
-            my skills into action, constantly working on my personal projects.
-            My ultimate goal is to create efficient, user-friendly applications
-            and become a versatile <strong> full-stack developer</strong>.
-          </p>
-          <p className="mt-4 text-sm font-light text-center text-slate-200 lg:px-16 sm:text-base">
-            Recently, I've been eyeing a new venture: sharing my tech journey
-            through a{" "}
-            <strong className="duration-200 cursor-pointer hover:text-red-500">
-              YouTube channel
-            </strong>
-            . I want to teach and inspire others with what I've learned.
-            Passionate about tech and eager to keep growing? That's me!
+            {data?.data[0].about_me}
           </p>
         </div>
       </div>
