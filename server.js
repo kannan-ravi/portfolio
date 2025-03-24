@@ -11,6 +11,7 @@ import profileRouter from "./server/routes/profile.route.js";
 import skillRouter from "./server/routes/skill.route.js";
 import experienceRouter from "./server/routes/experience.route.js";
 import errorHandler from "./server/middleware/dataHandler.js";
+import path from "path";
 dotenv.config();
 
 const app = express();
@@ -23,12 +24,18 @@ connectDB();
 
 app.use(express.static("./server/public"));
 
-app.use("/api/home", homeRouter)
+app.use("/api/home", homeRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/contact-attempt", contactAttemptRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/skill", skillRouter);
 app.use("/api/experience", experienceRouter);
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 app.use(errorHandler.defaultErrorHandle);
 
