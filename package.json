@@ -8,7 +8,8 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm install && npm install --prefix client && npm run build --prefix client",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "vercel-build": "npm run build"
   },
   "author": "Kannan Ravindran",
   "license": "ISC",
