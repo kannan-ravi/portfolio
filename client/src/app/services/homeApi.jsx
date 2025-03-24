@@ -1,4 +1,3 @@
-import { get } from "mongoose";
 import { apiSlice } from "./apiSlice";
 
 const extendedHomeApi = apiSlice.injectEndpoints({
