@@ -7,12 +7,14 @@ import { GiWhiteBook } from "react-icons/gi";
 
 const Nav = () => {
   const [hoveredItem, setHoveredItem] = useState<null | string>(null);
-  const hoverRef = useRef(null);
+  const hoverRef = useRef<HTMLUListElement>(null);
   const [hoverStyle, setHoverStyle] = useState({});
 
   useEffect(() => {
     if (hoveredItem && hoverRef.current) {
-      const itemElement = hoverRef.current.querySelector(`#${hoveredItem}`);
+      const itemElement = hoverRef.current.querySelector(
+        `#${hoveredItem}`
+      ) as HTMLElement;
       if (itemElement) {
         setHoverStyle({
           width: itemElement.offsetWidth,
@@ -26,14 +28,14 @@ const Nav = () => {
   }, [hoveredItem]);
 
   return (
-    <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 border rounded-full overflow-hidden dark:border-amber-50">
+    <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 shadow rounded-full overflow-hidden dark:border-amber-50 bg-white dark:bg-black dark:shadow-red-50">
       <ul
         ref={hoverRef}
         className="flex items-center justify-between relative"
         onMouseLeave={() => setHoveredItem(null)}
       >
         <div
-          className="absolute top-0 h-full bg-red-50 dark:bg-slate-800 transition-all duration-300 ease-in-out -z-10"
+          className="absolute top-0 h-full bg-gray-200 dark:bg-slate-800 transition-all duration-500 ease-in-out -z-10"
           style={hoverStyle}
         ></div>
 
