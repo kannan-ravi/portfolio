@@ -27,11 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${poppins.className} antialiased bg-gray-50 dark:bg-black mb-10`}
+        className={`${poppins.className} antialiased bg-gray-50 dark:bg-black`}
       >
         <Header />
         {children}
-        {/* <Nav /> */}
+        <Nav />
       </body>
     </html>
   );

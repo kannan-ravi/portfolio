@@ -4,7 +4,7 @@ import { SiMedium } from "react-icons/si";
 
 const Header = () => {
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 rounded-full bg-white shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] dark:bg-black dark:shadow-gray-50">
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 rounded-full bg-white shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] z-10 dark:bg-black dark:shadow-gray-50">
       <nav className="px-6 py-3">
         <ul className="flex items-center gap-8">
           <li

@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'randomuser.me',
-        pathname: '/api/portraits/men/**', // Correct wildcard for any path under /api/portraits/men/
+        hostname: 'picsum.dev',
+        pathname: '/**/**',
       },
     ],
   },

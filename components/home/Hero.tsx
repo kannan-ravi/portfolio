@@ -28,7 +28,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="mt-6">
-        <p className="leading-6.5 dark:text-white">
+        <p className="leading-6.5 text-sm dark:text-white">
           I'm a creative full stack developer with over two years of experience.
           I specialize in Frontend and crafting engaging user experiences with
           great attention to detail.
