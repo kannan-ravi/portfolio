@@ -1,0 +1,3 @@
+echo "🔍 Running lint-staged on staged files..."
+npm run lint:staged
+echo "✅ Linting complete. Proceeding with commit."

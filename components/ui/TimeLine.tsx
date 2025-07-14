@@ -1,33 +1,34 @@
-import { TimelinesItem } from "@/types/type";
-import React from "react";
+import { TimelinesItem } from '@/types/type'
+import Image from 'next/image'
+import React from 'react'
 
 type propsTypes = {
-  datas: TimelinesItem[];
-};
+  datas: TimelinesItem[]
+}
 
 const TimeLine = ({ datas }: propsTypes) => {
   return (
     <div className="mt-6 border dark:border-white">
       {datas.map((data) => (
-        <div className="flex items-start relative" key={data.id}>
-          <span className="w-[2px] h-full bg-gray-800 absolute left-12 -z-10 dark:bg-gray-200"></span>
+        <div className="relative flex items-start" key={data.id}>
+          <span className="absolute left-12 -z-10 h-full w-[2px] bg-gray-800 dark:bg-gray-200"></span>
           <div className="p-4">
-            <img
+            <Image
               src={data.image}
               alt="Company Logo"
               width={64}
               height={64}
-              className="object-cover rounded-full max-h-16 bg-white border w-16 h-16"
+              className="h-16 max-h-16 w-16 rounded-full border bg-white object-cover"
             />
           </div>
           <div className="pt-5">
             {data.timelines.map((timeline) => (
               <div className="pb-4" key={timeline.id}>
-                <p className="text-gray-600 text-xs dark:text-gray-400">
+                <p className="text-xs text-gray-600 dark:text-gray-400">
                   Mar 2023 - Present
                 </p>
                 <p className="font-semibold dark:text-white">{data.name}</p>
-                <p className="text-gray-600 text-sm dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   {timeline.title}
                 </p>
               </div>
@@ -36,7 +37,7 @@ const TimeLine = ({ datas }: propsTypes) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default TimeLine;
+export default TimeLine

@@ -1,6 +1,6 @@
-import Image from "next/image";
-import React from "react";
-import { FaLocationPin } from "react-icons/fa6";
+import Image from 'next/image'
+import React from 'react'
+import { FaLocationPin } from 'react-icons/fa6'
 
 const Hero = () => {
   return (
@@ -12,11 +12,11 @@ const Hero = () => {
             alt="Profile Image"
             width="80"
             height="80"
-            className="rounded-full border-4 border-green-500 max-w-20 max-h-20 object-cover object-top"
+            className="max-h-20 max-w-20 rounded-full border-4 border-green-500 object-cover object-top"
           />
         </div>
         <div>
-          <h1 className="text-2xl font-semibold mb-1 dark:text-white">
+          <h1 className="mb-1 text-2xl font-semibold dark:text-white">
             Kannan Ravindran
           </h1>
           <div className="flex items-center gap-2 text-sm">
@@ -28,14 +28,14 @@ const Hero = () => {
         </div>
       </div>
       <div className="mt-6">
-        <p className="leading-6.5 text-sm dark:text-white">
-          I'm a creative full stack developer with over two years of experience.
-          I specialize in Frontend and crafting engaging user experiences with
-          great attention to detail.
+        <p className="text-sm leading-6.5 dark:text-white">
+          I&apos;m a creative full stack developer with over two years of
+          experience. I specialize in Frontend and crafting engaging user
+          experiences with great attention to detail.
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
